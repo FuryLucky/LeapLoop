@@ -83,11 +83,11 @@ function collision($track, $pad) {
 	var r2 = x2 + w2;
 	    
 	if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) {
-		$pad.css('border-color', 'black');
+		$pad.css('background-image','radial-gradient(purple, transparent)');
 		return false;
 	}
 	else{
-		$pad.css('border-color', 'red');
+		$pad.css('background-image','radial-gradient(purple, red)');
 		return true;
 	}
 }
