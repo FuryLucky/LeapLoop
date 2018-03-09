@@ -1,4 +1,4 @@
-var $track;
+let $track;
 
 $(function() {
 	'use strict';
@@ -25,7 +25,7 @@ function onAddTrack() {
 // Gère l'activation d'un pad
 function onPadClick(event) {
 	event.preventDefault();
-
+	
 	$(this).toggleClass('pad-on');
 }
 
@@ -37,8 +37,8 @@ function onSwitchClick(event) {
 	$(this).toggleClass('switch-on');
 
 	if ($(this).hasClass('switch-on') === true) {
-		$(this).parent().removeClass('track-disabled')
+		$(this).parent().removeClass('track-disabled');
 	} else {
-		$(this).parent().addClass('track-disabled')
+		$(this).parent().addClass('track-disabled');
 	}
 }
