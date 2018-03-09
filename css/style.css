@@ -1,0 +1,50 @@
+html {
+    background-image: linear-gradient(#00001a, #66ccff, #330033);
+    min-height: 100vh;
+}
+
+body {
+	background-color: transparent;
+	margin: 0;
+}
+
+/* Barre des contrôles */
+.controls{
+	height: 16vh;
+	border: 1px solid black;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.track {
+	width: 100vw;
+	display: flex;
+	opacity: 1;
+}
+
+.track .switch,
+.track .pad,
+.track .volume,
+.track .pan,
+.track .frequency {
+	outline: 1px solid orange;
+	height: 50px;
+	flex: 1;
+}
+
+.switch-on {
+	background-color: orange;
+}
+
+.pad-on {
+	background-color: red;
+}
+
+.track .volume,
+.track .pan,
+.track .frequency {
+	background-color: darkblue;
+}
+
+.track.track-disabled {
+	opacity: 0.5;
+}
