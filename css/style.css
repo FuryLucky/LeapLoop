@@ -26,13 +26,26 @@ body {
 .track .volume,
 .track .pan,
 .track .frequency {
-	outline: 1px solid orange;
+	border: 1px solid orange;
+	border-radius: 10px;
 	height: 50px;
 	flex: 1;
 }
 
+.switch {
+	background-color: red;
+}
+
 .switch-on {
-	background-color: orange;
+	background-color: green;
+}
+
+.pad {
+	transition: background-color .3s;
+}
+
+.pad:hover {
+	background-color: yellow;
 }
 
 .pad-on {
