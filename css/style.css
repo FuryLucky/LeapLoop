@@ -77,6 +77,10 @@ body {
 	background-image:radial-gradient(purple, transparent);
 }
 
+.pad-play {
+	background-image:radial-gradient(purple, red);
+}
+
 .track .volume,
 .track .pan,
 .track .frequency {
