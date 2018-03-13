@@ -2,19 +2,20 @@
 
 // Init et let
 window.onload = init;
-let context;
+let ctx;
 let bufferLoader;
 let source1;
 let source2;
+let sources = []
 
 function init() {
     // Fix up prefixing
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     // Sound Container
-    context = new AudioContext();
+    ctx = new AudioContext();
 
     // Charge les Sound
-    bufferLoader = new BufferLoader( context,
+    bufferLoader = new BufferLoader( ctx,
     [
         // Tableau des Sound
         '/assets/closed_hat.wav',
@@ -29,23 +30,40 @@ function init() {
 }
 
 // Joue les Sounds on click sur le bouton
-function playSounds() {
-    $('#play').on('click', function() {
-        source1.start();
-        source2.start();
-    })
+function playSound($pad) {
+
+    let $track = $pad.parents('.track');
+
+    if ($track.hasClass('track-disabled') === true) {
+        return;
+    }
+
+    let index = $track.index() - 1; // -1 à cause de l'élément .track-bar qui se trouve aussi en tant que parent dans le tracks-container
+
+    console.log('source n°', index, 'chargées');
+
+    if (sources[index]) {
+        console.log(sources[index])
+        sources[index].start();
+    } else {
+        console.warn('Aucune sources trouvées pour cet index');
+    }
 }
 
 // Quand tous les Sound sont chargés
 function finishedLoading(bufferList) {
     // Create two sources and play them both together.
     // Une Source par Sound
-    source1 = context.createBufferSource();
-    source2 = context.createBufferSource();
+    source1 = ctx.createBufferSource();
+    source2 = ctx.createBufferSource();
     source1.buffer = bufferList[0];
     source2.buffer = bufferList[1];
 
-    source1.connect(context.destination);
-    source2.connect(context.destination);
-    playSounds();
+    source1.connect(ctx.destination);
+    source2.connect(ctx.destination);
+
+    sources = [source1, source2];
+
+    console.log("Tous les sons ont finit de charger");
+    // playSounds();
 }
