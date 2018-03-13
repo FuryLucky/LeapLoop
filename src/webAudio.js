@@ -20,12 +20,12 @@ function init() {
         // Tableau des Sound
         '/assets/closed_hat.wav',
         '/assets/kick.wav',
+        '/assets/snare.wav',
     ],
     finishedLoading
     );
     
     console.log("Tous les sons sont chargés");
-    console.log(bufferLoader.bufferList);
     bufferLoader.load();
 }
 
@@ -64,6 +64,7 @@ function finishedLoading(bufferList) {
 
     sources = [source1, source2];
 
+    console.log(sources);
+
     console.log("Tous les sons ont finit de charger");
-    // playSounds();
 }

@@ -1,5 +1,15 @@
 var $track;
 
+function getCoords(leapPoint, frame, body) {
+    const iBox = frame.interactionBox;
+    const normalizedPoint = iBox.normalizePoint(leapPoint, true);
+
+    return {
+        x : normalizedPoint[0] * body.width,
+        y : (1 - normalizedPoint[1]) * body.height
+    };
+}
+
 $(function() {
 	'use strict';
 
