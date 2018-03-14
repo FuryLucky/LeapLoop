@@ -1,37 +1,32 @@
-const canvas = document.getElementsByTagName('canvas')[0];
-const canvas_context = canvas.getContext('2d');
+const body = document.getElementsByTagName('body')[0];
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const controller = new Leap.Controller();
+const controller = new Leap.Controller({enableGestures: true});
 controller.connect();
 
 controller.on('frame', (frame) => {
 	
-	// Efface le canvas
-	canvas_context.clearRect(0, 0, canvas.width, canvas.height);
-	
 	// Pour chaque main
 	frame.hands.forEach( hand => {
 		// Dessin de la paume
-        let palmPos = getCoords(hand.palmPosition, frame, canvas);
-        canvas_context.beginPath();
-        canvas_context.arc(palmPos.x, palmPos.y, 15, 0, 2 * Math.PI);
-        canvas_context.fillStyle = "red";
-        canvas_context.fill();
-        canvas_context.stroke();
-		
-	});
-	
+        let palmPos = getCoords(hand.palmPosition, frame, body);
+        let leap = document.getElementById('leap');
+
+        // console.log(leap.offsetTop);
+        // leap.style.top = hand.palmPosition[1] + "px";
+        leap.style.left = hand.palmPosition[0] + "px";
+        
+        if(hand.pinchStrength >= 0.8) {
+            console.log("PINCH !!!");
+        }
+    });
 });
 
-function getCoords(leapPoint, frame, canvas) {
+function getCoords(leapPoint, frame, body) {
     const iBox = frame.interactionBox;
     const normalizedPoint = iBox.normalizePoint(leapPoint, true);
 
     return {
-        x : normalizedPoint[0] * canvas.width,
-        y : (1 - normalizedPoint[1]) * canvas.height
+        x : normalizedPoint[0] * body.width,
+        y : (1 - normalizedPoint[1]) * body.height
     };
 }

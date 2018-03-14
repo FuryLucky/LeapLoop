@@ -1,4 +1,5 @@
-var $track;
+let $track;
+let trackInterval;
 
 function getCoords(leapPoint, frame, body) {
     const iBox = frame.interactionBox;
@@ -18,6 +19,8 @@ $(function() {
 	// Gestion de l'activation des pad (au click)
 	$('.tracks-container').on('click', '.pad', onPadClick);
 	$('.tracks-container').on('click', '.switch', onSwitchClick);
+	$('.controls').on('click', '#play', onPlayClick);
+	$('.controls').on('click', '#stop', onStopClick);
 
 	// initControlsListeners();
 	for (let i = 0; i < 11; i++) {
@@ -29,6 +32,14 @@ $(function() {
 function onAddTrack() {
 	// Pour cloner une ligne
 	$track.clone(true).appendTo('.tracks-container');
+}
+
+function onPlayClick() {
+	trackInterval = window.setInterval(function(){ loader(); }, 1);
+}
+
+function onStopClick() {
+	clearInterval(trackInterval);
 }
 
 // Gère l'activation d'un pad
@@ -51,13 +62,11 @@ function onSwitchClick(event) {
 	}
 }
 
-
-
-var i = 75;
+let i = 75;
 
 function loader() {
 
-	var globalCollision = false;
+	let globalCollision = false;
 
 	$('.pad-on').each(function() {
 		if (collision($('.track-bar'), $(this)) === true) {
@@ -74,22 +83,22 @@ function loader() {
     if (i == 1310) {i = 60}
 }
 
-window.setInterval(function(){ loader(); }, 1);
+// window.setInterval(function(){ loader(); }, 1);
 
 
 function collision($trackBar, $pad) {
-	var x1 = $trackBar.offset().left;
-	var y1 = $trackBar.offset().top;
-	var h1 = $trackBar.outerHeight(true);
-	var w1 = $trackBar.outerWidth(true);
-	var b1 = y1 + h1;
-	var r1 = x1 + w1;
-	var x2 = $pad.offset().left;
-	var y2 = $pad.offset().top;
-	var h2 = $pad.outerHeight(true);
-	var w2 = $pad.outerWidth(true);
-	var b2 = y2 + h2;
-	var r2 = x2 + w2;
+	let x1 = $trackBar.offset().left;
+	let y1 = $trackBar.offset().top;
+	let h1 = $trackBar.outerHeight(true);
+	let w1 = $trackBar.outerWidth(true);
+	let b1 = y1 + h1;
+	let r1 = x1 + w1;
+	let x2 = $pad.offset().left;
+	let y2 = $pad.offset().top;
+	let h2 = $pad.outerHeight(true);
+	let w2 = $pad.outerWidth(true);
+	let b2 = y2 + h2;
+	let r2 = x2 + w2;
 	    
 	if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) {
 		$pad.removeClass('pad-play');
