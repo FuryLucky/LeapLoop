@@ -1,15 +1,6 @@
 let $track;
 let trackInterval;
 
-function getCoords(leapPoint, frame, body) {
-    const iBox = frame.interactionBox;
-    const normalizedPoint = iBox.normalizePoint(leapPoint, true);
-
-    return {
-        x : normalizedPoint[0] * body.width,
-        y : (1 - normalizedPoint[1]) * body.height
-    };
-}
 
 $(function() {
 	'use strict';
@@ -45,7 +36,7 @@ function onStopClick() {
 // Gère l'activation d'un pad
 function onPadClick(event) {
 	event.preventDefault();
-
+	
 	$(this).toggleClass('pad-on');
 }
 
@@ -62,7 +53,7 @@ function onSwitchClick(event) {
 	}
 }
 
-let i = 75;
+let i = 60;
 
 function loader() {
 
@@ -80,11 +71,8 @@ function loader() {
 	    left : i
 	});
     i++;
-    if (i == 1310) {i = 60}
+    if (i > window.innerWidth - $('.pad').first().width() * 3) {i = 60}
 }
-
-// window.setInterval(function(){ loader(); }, 1);
-
 
 function collision($trackBar, $pad) {
 	let x1 = $trackBar.offset().left;

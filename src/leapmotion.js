@@ -1,5 +1,3 @@
-const body = document.getElementsByTagName('body')[0];
-
 const controller = new Leap.Controller({enableGestures: true});
 controller.connect();
 
@@ -8,25 +6,30 @@ controller.on('frame', (frame) => {
 	// Pour chaque main
 	frame.hands.forEach( hand => {
 		// Dessin de la paume
-        let palmPos = getCoords(hand.palmPosition, frame, body);
+        let palmPos = getCoords(hand.palmPosition, frame);
         let leap = document.getElementById('leap');
 
         // console.log(leap.offsetTop);
-        // leap.style.top = hand.palmPosition[1] + "px";
-        leap.style.left = hand.palmPosition[0] + "px";
+        leap.style.top = palmPos.y + "px";
+        leap.style.left = palmPos.x + "px";
+
+        // console.log("Y = ", hand.palmPosition[1]);
+        // console.log("X = ", hand.palmPosition[0]);
         
-        if(hand.pinchStrength >= 0.8) {
-            console.log("PINCH !!!");
-        }
+        frame.gestures.forEach(gesture => {
+            switch (gesture.type) {
+              case 'keyTap'    : console.info('KeyTap detected'); break;
+            }
+        });
     });
 });
 
-function getCoords(leapPoint, frame, body) {
+function getCoords(leapPoint, frame) {
     const iBox = frame.interactionBox;
     const normalizedPoint = iBox.normalizePoint(leapPoint, true);
 
     return {
-        x : normalizedPoint[0] * body.width,
-        y : (1 - normalizedPoint[1]) * body.height
+        x : normalizedPoint[0] * window.innerWidth,
+        y : (1 - normalizedPoint[1]) * window.innerHeight
     };
 }
