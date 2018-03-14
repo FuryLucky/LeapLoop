@@ -18,7 +18,9 @@ controller.on('frame', (frame) => {
         
         frame.gestures.forEach(gesture => {
             switch (gesture.type) {
-              case 'keyTap'    : console.info('KeyTap detected'); break;
+              case 'keyTap' : 
+                console.info('KeyTap detected');
+                break;
             }
         });
     });

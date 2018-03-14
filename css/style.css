@@ -38,12 +38,18 @@ body {
 #play,
 #stop {
 	background-color: white;
-	border: 1px solid #00001a;
+	border: 1px solid black;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	height: 50px;
 	width: 50px;
+}
+
+.play-hover,
+.stop-hover {
+	background-color: black;
+	border: 1px solid white;
 }
 
 /* Tracks-Container */
@@ -75,7 +81,9 @@ body {
 }
 
 .track .switch:hover,
-.track .pad:hover {
+.track .switch-hover,
+.track .pad:hover,
+.track .pad-hover {
 	background-image:radial-gradient(darkorange, transparent);
 }
 
@@ -104,4 +112,3 @@ body {
 .track.track-disabled {
 	opacity: 0.3;
 }
-
