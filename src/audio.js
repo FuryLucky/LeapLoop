@@ -6,7 +6,7 @@ window.SOUNDS = []
 
 function init() {
 
-    console.log('Loading...')
+    console.log('Chargement des sons...')
 
     let audioFileList = [
         // Tableau des Sound

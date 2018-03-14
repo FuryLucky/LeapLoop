@@ -1,2 +1,0 @@
-# LeapLoop
-Leap Motion Project
