@@ -9,12 +9,14 @@ body {
 	overflow: hidden;
 }
 
-canvas {
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(255, 255, 255, 0);
+#leap {
+	width: 3vw;
+	height: 3vh;
+	background-color: red;
+	border-radius: 100%;
 	position: absolute;
-	z-index: 1;
+	/* top: 50%; */
+	/* left: 50%; */
 }
 
 /* Barre des contrôles */
@@ -33,7 +35,8 @@ canvas {
 	width: 50px;
 }
 
-#play {
+#play,
+#stop {
 	background-color: white;
 	border: 1px solid #00001a;
 	border-radius: 10px;
