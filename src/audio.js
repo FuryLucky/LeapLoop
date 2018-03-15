@@ -6,13 +6,22 @@ window.SOUNDS = []
 
 function init() {
 
-    console.log('Chargement des sons...')
+    console.log('Loading...')
 
     let audioFileList = [
         // Tableau des Sound
-        '/assets/closed_hat.wav',
         '/assets/kick.wav',
         '/assets/snare.wav',
+        '/assets/hat.wav',
+        '/assets/bass.wav',
+        '/assets/bell.wav',
+        '/assets/biz.wav',
+        '/assets/guitarde.wav',
+        '/assets/harp.wav',
+        '/assets/piano.wav',
+        '/assets/plucked.wav',
+        '/assets/synth.wav',
+        '/assets/heavy_synth.wav'
     ];
 
     audioFileList.forEach(soundPath => {
