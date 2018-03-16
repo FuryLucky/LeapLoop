@@ -14,13 +14,11 @@ controller.on('frame', (frame) => {
         leap.style.left = palmPos.x + "px";
 
         // console.log("Y = ", hand.palmPosition[1]);
-        // console.log("X = ", hand.palmPosition[0]);
+        // console.log("X = ", hand.palmPosition[0]);    
         
         frame.gestures.forEach(gesture => {
             switch (gesture.type) {
-              case 'keyTap' : 
-                console.info('KeyTap detected');
-                break;
+              case 'keyTap'    : console.info('KeyTap detected'); break;
             }
         });
     });

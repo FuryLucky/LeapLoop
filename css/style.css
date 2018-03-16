@@ -23,6 +23,7 @@ body {
 .controls{
 	height: 15vh;
 	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
 }
 
 #track-add {
@@ -34,22 +35,23 @@ body {
 	height: 50px;
 	width: 50px;
 }
-
+#play{background-image:radial-gradient(darkgreen, cyan); }
+#stop{background-image:radial-gradient(darkorange, cyan); }
+#play:hover{background-image:radial-gradient(darkgreen, darkred); }
+#stop:hover{background-image:radial-gradient(darkorange, darkred); }
 #play,
 #stop {
-	background-color: white;
-	border: 1px solid black;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
 	height: 50px;
 	width: 50px;
+	margin: 1% 2%;
+	padding: 2% 3%;
 }
-
-.play-hover,
-.stop-hover {
-	background-color: black;
-	border: 1px solid white;
+#result{
+	color: red;
+	visibility: hidden;
 }
 
 /* Tracks-Container */
@@ -112,3 +114,4 @@ body {
 .track.track-disabled {
 	opacity: 0.3;
 }
+

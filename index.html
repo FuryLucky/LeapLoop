@@ -10,12 +10,13 @@
 </head>
 <body>
 	<div class="controls">
-		<button id="play">Play</button>
-		<button id="stop">Stop</button>
-		<p style="color: red;">Collision : <span id="result">false</span>
+		<button id="play"></button>
+		<button id="stop"></button>
+		<input id="vol-control" type="range" min="0" max="100" step="1" oninput="SetVolume(this.value)" onchange="SetVolume(this.value)"></input>
+		<p id="result"><span >false</span></p>
 	</div>
 	<div class="tracks-container">
-		<div id="leap"></div>
+		<div id="leap" class="leap"></div>
 		<div class="track-bar">|</div>
 		<div class="track">
 			<a href="#" class="switch switch-on"></a>
@@ -36,8 +37,6 @@
 			<a href="#" class="pad"></a>
 			<a href="#" class="pad"></a>
 			<a href="#" class="pad"></a>
-
-			<!-- <a href="#" class="volume" data-volume="50"></a> -->
 		</div>
 
 	</div>
