@@ -1,20 +1,25 @@
 let $track;
 let trackInterval;
-var play = false;
+let play = false;
+let thisPad;
+let thisSwitch;
 let i = 60;
 
 $(function() {
 	'use strict';
 
+	// Stock une track
 	$track = $('.track').first().clone(true);
 
 	// Gestion de l'activation des pad (au click)
 	$('.tracks-container').on('click', '.pad', onPadClick);
+	// Gestion de l'activation des switch (au click)
 	$('.tracks-container').on('click', '.switch', onSwitchClick);
+	// Gestion de l'activation des controls (au click)
 	$('.controls').on('click', '#play', onPlayClick);
 	$('.controls').on('click', '#stop', onStopClick);
 
-	// initControlsListeners();
+	// Génére les 11 autres tacks
 	for (let i = 0; i < 11; i++) {
 		onAddTrack()
 	}
@@ -28,6 +33,7 @@ function onAddTrack() {
 
 function onPlayClick() {
 	if (play == false) {
+		// Permet d'éviter un déclenchement multiple
 		trackInterval = window.setInterval(function(){ loader(); }, 30);
 		play = true;
 	}
@@ -35,9 +41,11 @@ function onPlayClick() {
 
 function onStopClick() {
 	if (play == true) {
+		// Stop la tack-bar
 		clearInterval(trackInterval);
 		play = false;
 	}else{
+		// Réinitialise la track-bar
 		i = 60;
 		$('.track-bar').offset({
 		    left : 60
@@ -46,16 +54,25 @@ function onStopClick() {
 }
 
 // Gère l'activation d'un pad
-function onPadClick(event) {
-	event.preventDefault();
-	
+function onPadClick() {	
+	// Au Leap
+	$(thisPad).toggleClass('pad-on');
+	// A la souris
 	$(this).toggleClass('pad-on');
 }
 
 // Gère l'activation d'un switch (et d'une piste)
-function onSwitchClick(event) {
-	event.preventDefault();
+function onSwitchClick() {
+	// Au Leap
+	$(thisSwitch).toggleClass('switch-on');
 
+	if ($(thisSwitch).hasClass('switch-on') === true) {
+		$(thisSwitch).parent().removeClass('track-disabled');
+	} else {
+		$(thisSwitch).parent().addClass('track-disabled');
+	}
+
+	// A la souris
 	$(this).toggleClass('switch-on');
 
 	if ($(this).hasClass('switch-on') === true) {
@@ -69,20 +86,21 @@ function loader() {
 
 	let globalCollision = false;
 
+	// Vérifie la colision du track-bar avec les pad
 	$('.pad-on').each(function() {
 		if (collision($('.track-bar'), $(this)) === true) {
 			globalCollision = true;
 		}
 	});
 
+	// Donne le résulta de cette collision (True && False)
 	$('#result').text(globalCollision);
 
 	$('.track-bar').offset({
 	    left : i
 	});
+	// Fait avancer le pad
     i += 7;
-	// Si Pad Parametre : 
-	//  i > window.innerWidth - $('.pad').first().width()
 	if (i > window.innerWidth) {i = 60}
 }
 
@@ -137,11 +155,13 @@ function collisionLeapPad($leap, $pad) {
 	let r2 = x2 + w2;
 	    
 	if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) {
+		// Si pas de collision
 		$pad.removeClass('pad-hover');
 	}
 	else{
+		// Si collision
 		$pad.addClass('pad-hover');
-		// console.log("Leap sur un pad");
+		thisPad = $pad;
 	}
 }
 
@@ -171,15 +191,18 @@ function collisionLeapSwitch($leap, $switch) {
 	let r2 = x2 + w2;
 	    
 	if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) {
+		// Si pas de collision
 		$switch.removeClass('switch-hover');
 	}
 	else{
+		// Si collision
 		$switch.addClass('switch-hover');
-		// console.log("Leap sur un switch");
+		thisSwitch = $switch;
 	}
 }
 
+// Répète les function de collision
 window.setInterval(function() {
 	padCollision();
 	switchCollision();
-}, 1) 
+}, 10) 
