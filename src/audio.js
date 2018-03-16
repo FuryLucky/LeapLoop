@@ -51,3 +51,11 @@ function playSound($pad) {
         console.warn('Aucune sources trouvées pour cet index');
     }
 }
+
+// VOLUME
+window.SetVolume = function(val)
+{
+    var player = document.getElementById('pad-play');
+    player.volume = val / 100;
+    console.log(player.volume);
+}

@@ -1,6 +1,7 @@
 let $track;
 let trackInterval;
-
+var play = false;
+let i = 60;
 
 $(function() {
 	'use strict';
@@ -26,11 +27,22 @@ function onAddTrack() {
 }
 
 function onPlayClick() {
-	trackInterval = window.setInterval(function(){ loader(); }, 1);
+	if (play == false) {
+		trackInterval = window.setInterval(function(){ loader(); }, 30);
+		play = true;
+	}
 }
 
 function onStopClick() {
-	clearInterval(trackInterval);
+	if (play == true) {
+		clearInterval(trackInterval);
+		play = false;
+	}else{
+		i = 60;
+		$('.track-bar').offset({
+		    left : 60
+		});
+	}
 }
 
 // Gère l'activation d'un pad
@@ -53,9 +65,8 @@ function onSwitchClick(event) {
 	}
 }
 
-let i = 60;
-
 function loader() {
+
 	let globalCollision = false;
 
 	$('.pad-on').each(function() {
@@ -63,13 +74,13 @@ function loader() {
 			globalCollision = true;
 		}
 	});
-	
+
 	$('#result').text(globalCollision);
 
 	$('.track-bar').offset({
 	    left : i
 	});
-	i += 7;
+    i += 7;
 	// Si Pad Parametre : 
 	//  i > window.innerWidth - $('.pad').first().width()
 	if (i > window.innerWidth) {i = 60}
@@ -171,4 +182,4 @@ function collisionLeapSwitch($leap, $switch) {
 window.setInterval(function() {
 	padCollision();
 	switchCollision();
-}, 1)
+}, 1) 
