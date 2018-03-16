@@ -2,14 +2,15 @@
 
 // Init
 window.onload = init;
+// Tableau de tous les sons
 window.SOUNDS = []
 
 function init() {
 
-    console.log('Loading...')
+    console.log('Loading...');
 
+    // Tableau SOUNDS
     let audioFileList = [
-        // Tableau des Sound
         '/assets/kick.wav',
         '/assets/snare.wav',
         '/assets/hat.wav',
@@ -24,6 +25,7 @@ function init() {
         '/assets/heavy_synth.wav'
     ];
 
+    // Création des balises audio
     audioFileList.forEach(soundPath => {
         let a = new Audio(soundPath);
         SOUNDS.push(a);
@@ -39,15 +41,16 @@ function playSound($pad) {
         return;
     }
 
+    // Récupère le son qui correspond à cette même ligne
     let index = $track.index() - 1; // -1 à cause de l'élément .track-bar qui se trouve aussi en tant que parent dans le tracks-container
 
     if (SOUNDS[index]) {
-
         if (SOUNDS[index].paused === true) {
             SOUNDS[index].currentTime = 0;
             SOUNDS[index].play();
         }
     } else {
+        // Si aucun son ne correspond à cette ligne
         console.warn('Aucune sources trouvées pour cet index');
     }
 }
